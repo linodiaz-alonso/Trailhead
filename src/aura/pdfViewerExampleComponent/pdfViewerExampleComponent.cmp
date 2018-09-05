@@ -1,0 +1,40 @@
+<aura:component controller="ShowContractController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" access="GLOBAL">
+	<!-- create 2 aura handler with waiting and donewaiting events--> 
+    <aura:handler event="aura:waiting" action="{!c.showSpinner}"/>
+    <aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}"/>
+
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+  	
+  	<!--create a component attributs -->
+  	<aura:attribute name="Spinner" type="boolean" default="false"/>
+	<aura:attribute name="pdfData" type="String"/>
+	<aura:attribute name="pdfContainer" type="Aura.Component[]"/>
+	<aura:attribute name='showPdfContainer' type='Boolean' default="false"/>
+	<aura:attribute name='showButton' type='Boolean' default="true"/>
+	<aura:attribute name="recordId" type="String"/>
+
+	<!--loading spinner start... style=Brand Medium (blue dots)-->
+	 <aura:if isTrue="{!v.Spinner}">
+	    <div aura:id="spinnerId" class="slds-spinner_container">
+	       <div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+	         <span class="slds-assistive-text">Loading</span>
+	         <div class="slds-spinner__dot-a"></div>
+	         <div class="slds-spinner__dot-b"></div>
+	       </div>
+	    </div>
+	 </aura:if>
+
+	<aura:if isTrue='{!v.showButton}'>
+    	<lightning:button label="Click here to display document" 
+                              aura:id="NewButton"
+                              variant="neutral"
+                              onclick="{!c.showContract}"/>	
+     </aura:if>
+	
+	<aura:if isTrue='{!v.showPdfContainer}'>
+    	<div style="height: 600px;">
+    		{!v.pdfContainer}	
+		</div>
+	</aura:if>
+
+</aura:component>

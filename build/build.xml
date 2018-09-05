@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sfdc-builder" basedir="." xmlns:sf="antlib:com.salesforce">
+
+    <echo>******** Entered Build.xml ********</echo>
+
+    <!-- Classpath 
+    ====================================== -->
+    <path id="ant.additions.classpath">
+        <fileset dir="lib" includes="*.jar"/>
+    </path>
+    <taskdef resource="com/salesforce/antlib.xml" uri="antlib:com.salesforce" classpathref="ant.additions.classpath" /> 
+
+    <!-- Build properties
+    ====================================== -->
+    <property environment="env" />
+    <property name="path" value="../" />    
+    <property name="source" value="${path}/src"/>
+
+    <!-- Salesforce constants
+    ====================================== -->
+    <property name="sf.maxPoll" value="50000" />    
+    <property name="sf.maxWaitMillis" value="50000" />   
+
+    <target name="zip-and-deploy">
+        <echo>******** Deployment ********</echo>
+        <sf:deploy 
+            username="${username}" 
+            password="${password}${securitytoken}" 
+            serverurl="${serverurl}" 
+            maxPoll="${sf.maxPoll}" 
+            pollWaitMillis="${sf.maxWaitMillis}" 
+            deployRoot="${source}"
+            checkOnly="${checkonly}" 
+            ignoreWarnings="true" 
+            rollbackOnError="true" 
+            testLevel="${testlevel}">
+        </sf:deploy>
+    </target>
+
+</project>

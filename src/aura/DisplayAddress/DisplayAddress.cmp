@@ -1,0 +1,18 @@
+<aura:component >
+	<aura:attribute name="header" type="Aura.Component[]"/>
+    
+    <aura:attribute name="Street" type="String" default="226 North End Road"/>
+    <aura:attribute name="City" type="String" default="London"/>
+    <aura:attribute name="State" type="String" default="London"/>
+    <aura:attribute name="PostalCode" type="String" default="W14 87"/>
+
+    <div>
+        <span class="header">Address</span><br/>
+        <span class="body">
+            {!v.Street} <br/>
+            {!v.City} <br/>
+            {!v.State} <br/>
+            {!v.PostalCode}
+        </span>
+    </div>
+</aura:component>
